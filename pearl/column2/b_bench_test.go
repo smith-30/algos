@@ -33,6 +33,14 @@ func Benchmark_RotateTaskB(b *testing.B) {
 	}
 }
 
+func GenStrSlice(count int) []string {
+	s := make([]string, 0, count)
+
+	for i := 0; i < count; i++ {
+		s = append(s, "a")
+	}
+	return s
+}
 func Benchmark_NewRotateTaskB(b *testing.B) {
 	for _, dataCount := range dataCounts {
 		for _, idx := range refIdx[dataCount] {

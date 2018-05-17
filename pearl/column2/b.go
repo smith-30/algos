@@ -23,13 +23,16 @@ func RotateTaskB(src []string, count int) {
 		c = count
 	}
 
+	// 後ろに回す分のデータを新規に確保 (メモリ割り当てが起こる)
 	rewind := make([]string, len(src[0:c]))
 	copy(rewind, src[0:c])
 
+	// 回転させないデータ領域を先頭にもってくる
 	for idx, val := range src[c:l] {
 		src[idx] = val
 	}
 
+	// 後ろに回す分のデータを整列させたデータの後ろにくっつける
 	copy(src[l-c:l], rewind[0:])
 }
 
