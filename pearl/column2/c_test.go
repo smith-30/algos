@@ -46,7 +46,7 @@ func TestGetAnagram(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			k := sortStr(tt.args.key)
-			d := getDict()
+			d := _getDict()
 			if want, ok := d[k]; !ok {
 				if !tt.wantErr {
 					panic(notFoundErr)
@@ -61,6 +61,22 @@ func TestGetAnagram(t *testing.T) {
 					t.Errorf("GetAnagram() = %v, want %v", got, want)
 				}
 			}
+		})
+	}
+}
+
+func TestAnagram(t *testing.T) {
+	tests := []struct {
+		name string
+	}{
+		{
+			"ok",
+		},
+	}
+	for _, tt := range tests {
+		setDict()
+		t.Run(tt.name, func(t *testing.T) {
+			Anagram()
 		})
 	}
 }
