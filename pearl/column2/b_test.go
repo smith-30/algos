@@ -188,3 +188,44 @@ func Test_reverse(t *testing.T) {
 		})
 	}
 }
+
+func Test_otedama(t *testing.T) {
+	type args struct {
+		src []string
+		i   int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []string
+	}{
+		{
+			name: "ok_0",
+			args: args{
+				src: []string{"a", "b", "c", "d", "e"},
+				i:   2,
+			},
+			want: []string{"c", "d", "e", "a", "b"},
+		},
+		{
+			name: "ok_0",
+			args: args{
+				src: []string{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"},
+				i:   3,
+			},
+			want: []string{"d", "e", "f", "g", "h", "i", "j", "k", "l", "a", "b", "c"},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			otedama(tt.args.src, tt.args.i)
+			if !reflect.DeepEqual(tt.args.src, tt.want) {
+				t.Errorf(`
+				name: %v,
+				act. %v
+				exp. %v
+			`, tt.name, tt.args.src, tt.want)
+			}
+		})
+	}
+}

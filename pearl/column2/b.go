@@ -1,5 +1,10 @@
 package column2
 
+import (
+	"fmt"
+	"math/big"
+)
+
 // なるべく少ないメモリと速さになるようにしたが
 // lとcountが近ければ近いほどメモリ割り当てが大きくなるのが辛い
 // count が l / 2より大きければ逆回しとかやったほうが
@@ -73,5 +78,32 @@ func reverse(src []string, s, e int) {
 			break
 		}
 		i += 1
+	}
+}
+
+func otedama(src []string, rotdist int) {
+	l := len(src)
+	bl := big.NewInt(int64(l))
+	bi := big.NewInt(int64(rotdist))
+	gcd := new(big.Int).GCD(nil, nil, bl, bi)
+	idx := int(gcd.Int64())
+
+	for i := 0; i < idx; i++ {
+		t := src[i]
+		j := i
+		for {
+			k := j + rotdist
+			if k >= l {
+				k -= l
+			}
+			if k == i {
+				break
+			}
+			fmt.Println(src[j], src[k])
+			src[j] = src[k]
+			j = k
+		}
+		src[j] = t
+		fmt.Println(src)
 	}
 }
