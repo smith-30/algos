@@ -99,7 +99,7 @@ func otedama(src []string, rotdist int) {
 			if k == i {
 				break
 			}
-			fmt.Println(src[j], src[k])
+			fmt.Println(j, src[j], k, src[k])
 			src[j] = src[k]
 			j = k
 		}
