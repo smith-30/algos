@@ -13,7 +13,7 @@ func Test_showSegment(t *testing.T) {
 		{
 			name: "ok_0",
 			args: args{
-				src: [5]byte{1, 2, 3, 8, 16},
+				src: [5]byte{255, 2, 3, 8, 255},
 			},
 		},
 	}
