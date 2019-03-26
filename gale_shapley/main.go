@@ -156,5 +156,5 @@ func main() {
 	e.AddParticipant(WomanFactory("w_3"))
 
 	// Event開始
-
+	
 }
