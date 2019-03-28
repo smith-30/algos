@@ -3,6 +3,7 @@ package lib
 import (
 	"fmt"
 	"math"
+	"sort"
 )
 
 func SingleInt() int {
@@ -84,6 +85,28 @@ func Sum(fn func(key, value int) int) func(m []int) int {
 	}
 }
 
+func SumDigits(number int) int {
+	var remainder, sumResult int
+	for number != 0 {
+		remainder = number % 10
+		sumResult += remainder
+		number = number / 10
+	}
+	return sumResult
+}
+
 func NoopSum(key, value int) int {
 	return value
+}
+
+func MakeRangeInts(min, max int) []int {
+	a := make([]int, max-min+1)
+	for i := range a {
+		a[i] = min + i
+	}
+	return a
+}
+
+func ReverseIntSlice(s []int) {
+	sort.Sort(sort.Reverse(sort.IntSlice(s)))
 }
