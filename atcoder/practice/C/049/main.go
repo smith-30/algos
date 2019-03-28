@@ -6,53 +6,28 @@ import (
 
 func main() {
 	s := SingleStr()
-
-	a := []string{"dreamer", "eraser"}
-	b := []string{"dream", "erase"}
-
-	slen := len(s)
-	var startIdx, endIdx int
+	strs := []string{"dreamer", "eraser", "dream", "erase"}
 	var hit bool
 
-	fmt.Printf("slen %#v\n", slen)
-
-	for {
-		endIdx = startIdx + 6
-
-		if slen >= endIdx {
-			if startIdx != 0 {
-				startIdx -= 1
-			}
-
-			if StrSearch(a, s[startIdx:endIdx]) {
-				fmt.Printf("1 %#v\n", s[startIdx:endIdx])
-				startIdx = endIdx
-				hit = true
-			}
-		}
-
-		if !hit {
-			endIdx = startIdx + 5
-			if slen >= endIdx {
-				if StrSearch(b, s[startIdx:endIdx]) {
-					startIdx = endIdx + 1
-					hit = true
-				}
-			}
-		}
-
-		if hit {
-			fmt.Printf("endIdx %#v %#v\n", endIdx, s[startIdx:endIdx])
-			if slen == endIdx {
-				break
-			}
-			hit = false
-			continue
-		}
-
-		break
+	s = StrReverse(s)
+	for i, item := range strs {
+		strs[i] = StrReverse(item)
 	}
 
+	for i := 0; i < len(s); {
+		var strHit bool
+		for _, item := range strs {
+			l := len(item)
+			fmt.Printf("%#v\n", i+l)
+			if item == s[i:i+l] {
+				strHit = true
+				i += l
+			}
+		}
+		if !strHit {
+			break
+		}
+	}
 	if hit {
 		fmt.Println("YES")
 		return
@@ -73,4 +48,12 @@ func StrSearch(a []string, b string) bool {
 		}
 	}
 	return false
+}
+
+func StrReverse(s string) string {
+	r := []rune(s)
+	for i, j := 0, len(r)-1; i < len(r)/2; i, j = i+1, j-1 {
+		r[i], r[j] = r[j], r[i]
+	}
+	return string(r)
 }
