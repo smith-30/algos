@@ -18,11 +18,17 @@ func main() {
 		var strHit bool
 		for _, item := range strs {
 			l := len(item)
-			fmt.Printf("%#v\n", i+l)
-			if item == s[i:i+l] {
-				strHit = true
-				i += l
+			if len(s) >= i+l {
+				if item == s[i:i+l] {
+					strHit = true
+					i += l
+					break
+				}
 			}
+		}
+		if len(s) == i && strHit {
+			hit = true
+			break
 		}
 		if !strHit {
 			break
