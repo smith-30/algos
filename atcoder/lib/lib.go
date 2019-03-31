@@ -55,7 +55,7 @@ func StrSearch(a []string, b string) bool {
 
 func Min(nums ...int) int {
 	if len(nums) == 0 {
-		panic("funciton min() requires at least one argument.")
+		panic("function min() requires at least one argument.")
 	}
 	res := nums[0]
 	for i := 0; i < len(nums); i++ {
@@ -66,7 +66,7 @@ func Min(nums ...int) int {
 
 func Max(nums ...int) int {
 	if len(nums) == 0 {
-		panic("funciton max() requires at least one argument.")
+		panic("function max() requires at least one argument.")
 	}
 	res := nums[0]
 	for i := 0; i < len(nums); i++ {
