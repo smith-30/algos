@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+// ReTodo https://atcoder.jp/contests/abc065/tasks/abc065_b
 func main() {
 	a := SingleInt()
 	slice := make([]int, 0, a)
@@ -53,6 +54,9 @@ func main() {
 
 	// ボタン押してから現在のボタンの値を取得するようにか
 	// N回までに値がでなかったら、重複したボタンを押していたらなんらかのループが起きている
+	// どうなったらループなのかの終了判定をシンプルに考える
+	// 今回で言えば、N個のボタンをある順に押していって、特殊な終了判定(2のとき)にひっかかれば
+	// N回押さずとも処理は終了するということに気づく
 }
 
 func SingleInt() int {
