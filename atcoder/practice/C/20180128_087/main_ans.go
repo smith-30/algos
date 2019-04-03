@@ -16,28 +16,33 @@ func main() {
 		}
 	}
 
-	
-	max := 0
-
-	for i := 0; i <= n; i++ {
-		line := 1
+	line := 1
 	row := 1
-	c := points[line][row]
-		var re int
-		for row := 1; row < n; row++ {
-			if i == 0 {
-				l
+	max := points[line][row]
+	line++
+	max += points[line][row]
+	for i := 1; i < n; i++ {
+		max += points[line][row+i]
+	}
+
+	for i := 2; i < n; i++ {
+		line := 1
+		c := points[line][row]
+		for row := 2; row <= n; row++ {
+			if i == row {
+				c += points[line][row]
+				line++
+				c += points[line][row]
+				continue
 			}
+			c += points[line][row]
+		}
+		if c > max {
+			max = c
 		}
 	}
 
-	// (2, N)がゴール
-	// 下か右にしか移動できない。
-	// 上には戻れない(下に行くのは1回のみ 2*Nのmapなので)
-
-	// 下を選択したら、もう右にしか行けない
-	// どのタイミングで下に行くかが重要か。
-	fmt.Printf("%#v\n", c)
+	fmt.Printf("%v\n", max)
 }
 
 func SingleInt() int {
