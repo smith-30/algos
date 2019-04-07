@@ -6,6 +6,12 @@ import (
 	"sort"
 )
 
+type Int64Slice []int64
+
+func (p Int64Slice) Len() int           { return len(p) }
+func (p Int64Slice) Less(i, j int) bool { return p[i] < p[j] }
+func (p Int64Slice) Swap(i, j int)      { p[i], p[j] = p[j], p[i] }
+
 func SingleInt() int {
 	var n int
 	fmt.Scan(&n)
@@ -34,6 +40,30 @@ func ScanStrings(len int) (strings []string) {
 		strings = append(strings, str)
 	}
 	return
+}
+
+func ReverseInt(target []int) {
+	for i := len(target)/2 - 1; i >= 0; i-- {
+		opp := len(target) - 1 - i
+		target[i], target[opp] = target[opp], target[i]
+	}
+}
+
+func ReverseInt64(target []int64) {
+	for i := len(target)/2 - 1; i >= 0; i-- {
+		opp := len(target) - 1 - i
+		target[i], target[opp] = target[opp], target[i]
+	}
+}
+
+func CeilInt(a, b int) int {
+	d := float64(a) / float64(b)
+	return int(math.Ceil(d))
+}
+
+func CeilInt64(a, b int64) int64 {
+	d := float64(a) / float64(b)
+	return int64(math.Ceil(d))
 }
 
 func Abs(a int) int {
