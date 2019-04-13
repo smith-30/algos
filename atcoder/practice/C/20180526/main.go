@@ -13,16 +13,18 @@ func main() {
 
 	r := make([]int, 0, n)
 	l := make([]int, 0, n)
-	var nw, ne, wc, ec int
+	var nw, wc, ec int
+
+	var max int
 
 	for _, v := range strs {
 		nw = wc
-		ne = ec
 
 		if v == "W" {
 			wc++
 		} else {
 			ec++
+			max = ec
 		}
 
 		if nw != wc {
@@ -31,20 +33,14 @@ func main() {
 			l = append(l, wc)
 		}
 
-		if ne != ec {
-			r = append(r, ec-1)
-		} else {
-			r = append(r, ec)
-		}
+		r = append(r, ec)
 	}
-
-	fmt.Printf("%#v\n", l)
-	fmt.Printf("%#v\n", r)
 
 	var min int
 	var once sync.Once
 	for i := 0; i < n; i++ {
-		re := r[i] + l[n-i-1]
+		var re int
+		re = max - r[i] + l[i]
 		once.Do(func() {
 			min = re
 		})
