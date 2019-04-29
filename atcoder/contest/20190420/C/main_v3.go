@@ -12,6 +12,11 @@ func main() {
 	whiteArr := make([]int, n)
 	blackArr := make([]int, n)
 
+	//
+	// 左からn個を白、以降は黒という風に分けることを目指す
+	// そうすると、最初のn個は、黒の数を数え、それ以降は白の数を
+	// 数えていけば、白黒の境目がiのときに入れ替える数がわかる
+	//
 	for i := 0; i < n; i++ {
 		// right hand side boundary
 		if "." == string(s[i]) {
