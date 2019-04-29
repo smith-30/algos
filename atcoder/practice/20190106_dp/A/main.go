@@ -14,11 +14,13 @@ func main() {
 		chs = append(chs, SingleInt())
 	}
 
+	// iより前までの最小コストをdpが記録しているので
+	// dp[i-1] + chs[i]-chs[i-1] で1つまたいだときの値
+	// dp[i-2] + chs[i]-chs[i-2] で2つまたいだときの値がわかる
 	dp := make([]int, n, n)
 	dp[0] = 0
 	dp[1] = int(math.Abs(float64(chs[1] - chs[0])))
 	for i := 2; i < n; i++ {
-		fmt.Printf("%#v, %#v\n", dp[i-1]+int(math.Abs(float64(chs[i]-chs[i-1]))), dp[i-2]+int(math.Abs(float64(chs[i]-chs[i-2]))))
 		dp[i] = Min(dp[i-1]+int(math.Abs(float64(chs[i]-chs[i-1]))), dp[i-2]+int(math.Abs(float64(chs[i]-chs[i-2]))))
 	}
 
