@@ -7,26 +7,34 @@ import (
 
 func main() {
 	n := SingleInt()
-	k := SingleInt()
-	chs := make([]int, 0, n)
+
+	chs := make([][]int, n)
+
 	for i := 0; i < n; i++ {
-		chs = append(chs, SingleInt())
+		chs[i] = make([]int, 3)
+		for j := 0; j < 3; j++ {
+			chs[i][j] = SingleInt()
+		}
 	}
 
-	dp := make([]int, n, n)
-	dp[0] = 0
-	dp[1] = int(math.Abs(float64(chs[1] - chs[0])))
-	for i := 2; i < n; i++ {
-		cand := make([]int, 0, k)
-		for j := 1; j <= k; j++ {
-			if i-j >= 0 {
-				cand = append(cand, dp[i-j]+int(math.Abs(float64(chs[i]-chs[i-j]))))
+	dp := make([][]int, n+1)
+	dp[0] = make([]int, 3)
+	for i := 0; i < n; i++ {
+		dp[i+1] = make([]int, 3)
+		for j := 0; j < 3; j++ {
+			for k := 0; k < 3; k++ {
+				if j != k {
+					dp[i+1][k] = Max(dp[i][j]+chs[i][k], dp[i+1][k])
+				}
 			}
 		}
-		dp[i] = Min(cand...)
 	}
 
-	fmt.Printf("%#v\n", dp[n-1])
+	var res int
+	for i := 0; i < 3; i++ {
+		res = Max(res, dp[n][i])
+	}
+	fmt.Printf("%#v\n", res)
 }
 
 func SingleInt() int {
@@ -35,13 +43,13 @@ func SingleInt() int {
 	return n
 }
 
-func Min(nums ...int) int {
+func Max(nums ...int) int {
 	if len(nums) == 0 {
-		panic("function min() requires at least one argument.")
+		panic("function max() requires at least one argument.")
 	}
 	res := nums[0]
 	for i := 0; i < len(nums); i++ {
-		res = int(math.Min(float64(res), float64(nums[i])))
+		res = int(math.Max(float64(res), float64(nums[i])))
 	}
 	return res
 }
