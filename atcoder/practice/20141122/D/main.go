@@ -20,39 +20,34 @@ func main() {
 		}
 	}
 
-	fmt.Printf("%#v\n", chs)
-	fmt.Printf("%#v\n", k)
-	fmt.Printf("%#v\n", wid)
-
-	dp := make([][][]int, n+1)
-	dp[0] = make([][]int, wid+1)
-	for i := 0; i <= k; i++ {
-		dp[0][i] = make([]int, k+1)
+	dp := make([][]int, k+1)
+	for idx, _ := range dp {
+		dp[idx] = make([]int, wid+1)
 	}
 
-	// 幅 -> chs[i][width]
-	// 次 -> chs[i+1][width]
-
-	for i := 0; i < n; i++ {
-		dp[i+1] = make([][]int, wid+1)
-		dp[i+1][wid] = make([]int, k+1)
-		fmt.Printf("1 %#v\n", 1)
-		for j := 0; j <= k; j++ {
-
-			if wid >= chs[i][width] {
-				fmt.Printf("aa %#v\n", dp[i+1][wid][j])
-				fmt.Printf("aaa %#v\n", wid-chs[i][width])
-				fmt.Printf("%#v\n", dp[i][wid])
-				fmt.Printf("aaaa %#v\n", dp[i][wid][j])
-				dp[i+1][wid][j] = Max(dp[i][wid-chs[i][width]][j]+chs[i][value], dp[i][wid][j])
-			} else {
-				dp[i+1][wid][j] = dp[i][wid][j]
-			}
-		}
-	}
 	fmt.Printf("%#v\n", dp)
 
-	fmt.Printf("%#v\n", dp[n][wid][k])
+	var ans int
+
+	// 幅 -> vals[width]
+	// 次 -> vals[width]
+	for _, vals := range chs {
+		// なぜindexを後ろから進めているかというと
+		// 20130821-Aと同じように、ある選択(index)のときにキャッシュさせたい値が
+		// 同一ループ内で再アクセスされるのを防ぎたいから
+		// 基本的にdpの一次元目のindexを持つ値には再アクセスさせないように工夫するっぽい
+		// index足りなくてout of range error 出てきたらループの回し方がおかしいと思ったほうがいい
+		for i := k; i >= 1; i-- {
+			fmt.Printf("%#v, %#v\n", i, vals[value])
+			for j := vals[width]; j <= wid; j++ {
+				dp[i][j] = Max(dp[i][j-vals[width]]+vals[value], dp[i][j])
+				ans = Max(ans, dp[i][j])
+			}
+		}
+		fmt.Printf("%#v\n", dp)
+	}
+
+	fmt.Printf("%#v\n", ans)
 }
 
 func SingleInt() int {
