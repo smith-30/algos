@@ -24,6 +24,10 @@ func main() {
 		for j := 0; j < 3; j++ {
 			for k := 0; k < 3; k++ {
 				if j != k {
+					// Max(dp[i][j]+chs[i][k], dp[i+1][k])
+					// dp[i+1][k] 最大値は、組み合わせによって変わりうるので常に比較する
+
+					// dp[i][j]+chs[i][k] で、色の連続選択が起こらないようにしている
 					dp[i+1][k] = Max(dp[i][j]+chs[i][k], dp[i+1][k])
 				}
 			}
