@@ -7,32 +7,24 @@ import (
 
 func main() {
 	n := SingleInt()
-	res := n
+	dp := make([]int, n+1)
+	dp[0] = 0
 
-	// 1 ≤ N ≤ 100000
-	// 6で利用できる累乗は6まで
-	// 9で利用できる累乗は5まで
-	// for i := 0; i < n; i++ {
-
-	// }
-	var cc, t int
-	t = n
-	for t > 0 {
-		cc += t % 6
-		fmt.Printf("--- %#v %#v\n", t, t%6)
-		t /= 6
+	for i := 1; i <= n; i++ {
+		dp[i] = 999999
+		p := 1
+		for p <= i {
+			dp[i] = Min(dp[i], dp[i-p]+1)
+			p *= 6
+		}
+		p = 1
+		for p <= i {
+			dp[i] = Min(dp[i], dp[i-p]+1)
+			p *= 9
+		}
 	}
 
-	fmt.Printf("%#v\n", cc)
-
-	var cc2 int
-	t = n
-	for t > 0 {
-		cc2 += t % 9
-		t /= 9
-	}
-
-	fmt.Printf("%#v\n", Min(res, cc, cc2))
+	fmt.Printf("%#v\n", dp[n])
 }
 
 func SingleInt() int {
