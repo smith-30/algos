@@ -29,7 +29,6 @@ func main() {
 				ans = max(ans, dp[j][k])
 			}
 		}
-		// fmt.Printf("%#v\n", dp)
 	}
 
 	fmt.Println(ans)

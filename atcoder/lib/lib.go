@@ -148,3 +148,7 @@ func StrReverse(s string) string {
 	}
 	return string(r)
 }
+
+func IntPow(x, y int) int {
+	return int(math.Pow(float64(x), float64(y)))
+}
