@@ -37,10 +37,11 @@ func main() {
 	dp1[0][0] = 0
 	for i := 1; i < n; i++ {
 		dp1[i] = make([]int64, sum+1)
-		for j := 1; j <= n; j++ {
+		for j := 1; j <= sum; j++ {
+			dp1[i][j] = Ma
 		}
 	}
-	fmt.Printf("%#v\n", dp1)
+	fmt.Printf("%#v\n", dp1[n][sum])
 
 	// a := int64(math.Pow(3, float64(n)))
 	// fmt.Printf("%#v\n", (a-(3*dp1[n-1])+(3*dp2[n-1]))%mod)
