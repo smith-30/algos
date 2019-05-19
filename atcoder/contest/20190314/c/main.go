@@ -12,30 +12,24 @@ func main() {
 	ss := make([]string, 0, n)
 	ss = strings.Split(s, "")
 
-	temp := make([]string, n+1, n+1)
+	temp := make([]int, n+1, n+1)
 
 	l := len(ss)
-
-	for i, item := range ss {
-		if i+1 < l {
-			if item == "A" && ss[i+1] == "C" {
-				temp[i] = "*"
-				ss[i+1] = ""
-				continue
-			}
+	var c int
+	for idx := 1; idx < l; idx++ {
+		if ss[idx-1] == "A" && ss[idx] == "C" {
+			c++
+			temp[idx] = c
+			continue
 		}
-		temp[i] = item
+		temp[idx] = c
 	}
+	// fmt.Printf("%#v\n", ss)
+	// fmt.Printf("%#v\n", temp)
 
 	for index := 0; index < q; index++ {
 		s, e := SingleInt(), SingleInt()
-		var c int
-		for j := s - 1; j < e-1; j++ {
-			if temp[j] == "*" {
-				c++
-			}
-		}
-		fmt.Println(c)
+		fmt.Println(temp[e-1] - temp[s-1])
 	}
 
 }
