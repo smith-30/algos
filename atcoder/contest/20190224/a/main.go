@@ -1,22 +1,27 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
 
 func main() {
-	var a, b, c int
-	fmt.Scan(&a)
-	fmt.Scan(&b)
-	fmt.Scan(&c)
+	var n string
+	fmt.Scan(&n)
 
-	if b >= a*c {
-		fmt.Println(c)
+	ss := strings.Split(n, "/")
+	y, _ := strconv.Atoi(ss[0])
+	m, _ := strconv.Atoi(ss[1])
+	// d, _ := strconv.Atoi(ss[2])
+
+	if y > 2019 {
+		fmt.Println("TBD")
 		return
 	}
-
-	if a > b {
-		fmt.Println(0)
+	if m > 4 {
+		fmt.Println("TBD")
 		return
 	}
-
-	fmt.Println(b / a)
+	fmt.Println("Heisei")
 }
