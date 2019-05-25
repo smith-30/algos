@@ -19,15 +19,30 @@ func main() {
 	for index := l - 1; index >= 0; index-- {
 		dict[index] = make([]int64, 26, 26)
 		for j := 0; j < 26; j++ {
-			dict[index][j] =
-				dict[index+1][j]
+			dict[index][j] = dict[index+1][j]
 		}
 		r := []rune(ss[index])
 		dict[index][r[0]-'a'] = int64(index)
 	}
 
-	fmt.Printf("%#v\n", dict)
+	for _, item := range dict {
+		fmt.Printf("%#v\n", item)
+	}
+
+	fmt.Printf("%#v\n", 'a')
+	fmt.Printf("%#v\n", 'b')
+
+	// for index := l - 1; index >= 0; index-- {
+	// 	dict[index] = make([]int64, 26, 26)
+	// 	for j := 0; j < 26; j++ {
+	// 		dict[index][j] = dict[index+1][j]
+	// 	}
+	// 	r := []rune(ss[index])
+	// 	fmt.Printf("%#v\n", r[0]-'a')
+	// 	dict[index][r[0]-'a'] = int64(index)
+	// }
 
 	dp := make([]int64, l+1, l+1)
 	dp[0] = 1
+
 }
