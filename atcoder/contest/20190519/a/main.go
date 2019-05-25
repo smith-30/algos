@@ -23,5 +23,5 @@ func main() {
 		}
 	}
 
-	fmt.Printf("%#v\n", strings.Join(ss, ""))
+	fmt.Println(strings.Join(ss, ""))
 }

@@ -17,14 +17,18 @@ func main() {
 	c, _ := strconv.Atoi(a)
 	d, _ := strconv.Atoi(b)
 
-	switch {
-	case 0 < c && c <= 12 && 0 < d && d <= 12:
-		fmt.Println("AMBIGUOUS")
-	case (0 == c) || (0 == d || d > 12):
-		fmt.Println("NA")
-	case c > 12 && 0 < d && d <= 12:
-		fmt.Println("YYMM")
-	case d > 12 && 0 < c && c <= 12:
-		fmt.Println("MMYY")
+	if 0 < c && c <= 12 {
+		if 0 < d && d <= 12 {
+			fmt.Println("AMBIGUOUS")
+		} else {
+			fmt.Println("MMYY")
+		}
+	} else {
+		if 0 < d && d <= 12 {
+			fmt.Println("YYMM")
+		} else {
+			fmt.Println("NA")
+		}
 	}
+
 }
