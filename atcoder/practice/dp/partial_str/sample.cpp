@@ -6,6 +6,24 @@ using namespace std;
 
 const int MOD = 1000000007;
 
+// vector
+template<typename T> ostream& operator<<(ostream& s, const vector<T>& v) {
+	int len = v.size();
+	for (int i = 0; i < len; ++i) {
+		s << v[i]; if (i < len - 1) s << " ";
+	}
+	return s;
+}
+
+// 2 dimentional vector
+template<typename T> ostream& operator<<(ostream& s, const vector< vector<T> >& vv) {
+	int len = vv.size();
+	for (int i = 0; i < len; ++i) {
+		s << vv[i] << endl;
+	}
+	return s;
+}
+
 // res[i][c] := i 文字目以降で最初に文字 c が登場する index (存在しないときは n)
 vector<vector<int> > calcNext(const string &S)
 {
@@ -17,6 +35,14 @@ vector<vector<int> > calcNext(const string &S)
             res[i][j] = res[i + 1][j];
         res[i][S[i] - 'a'] = i;
     }
+
+    cout << res << endl;
+
+    // std::cout << "The vector elements are : ";
+    //
+    // for(int i=0; i < res.size(); i++)
+    //     std::cout << res.at(i) << ' ';
+
     return res;
 }
 
