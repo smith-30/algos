@@ -34,11 +34,11 @@ func main() {
 	//
 	// debug
 	//
-	// for _, item := range dict {
-	// 	fmt.Printf("%#v\n", item)
-	// }
+	for _, item := range dict {
+		fmt.Printf("%#v\n", item)
+	}
 
-	// fmt.Println()
+	fmt.Println()
 
 	dp := make([]int64, l+1, l+1)
 	dp[0] = 1
@@ -48,9 +48,10 @@ func main() {
 			if dict[i][j] >= int64(l) {
 				continue
 			}
-			// fmt.Printf("%#v\n", dict[i][j]+1)
+			fmt.Printf("i: %#v ::: %#v, %#v\n", i, dict[i][j]+1, dp[i])
 			dp[dict[i][j]+1] += dp[i]
 		}
+		fmt.Printf("%#v\n", dp)
 	}
 
 	// fmt.Printf("%#v\n", dp)
