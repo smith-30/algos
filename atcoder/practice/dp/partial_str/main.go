@@ -5,6 +5,8 @@ import (
 	"strings"
 )
 
+const sep = 1000000007
+
 // https://qiita.com/drken/items/a207e5ae3ea2cf17f4bd
 func main() {
 	var n string
@@ -29,31 +31,35 @@ func main() {
 		dict[index][r[0]-'a'] = int64(index)
 	}
 
-	for _, item := range dict {
-		fmt.Printf("%#v\n", item)
-	}
-
-	fmt.Println()
-
-	dp := make([]int64, n+1, n+1)
-	dp[0] = 1
-	for index := 0; index < n; index++ {
-		for j := 0; j < 26; j++ {
-			if dict[i][j]
-		}
-	}
-
-	// for index := l - 1; index >= 0; index-- {
-	// 	dict[index] = make([]int64, 26, 26)
-	// 	for j := 0; j < 26; j++ {
-	// 		dict[index][j] = dict[index+1][j]
-	// 	}
-	// 	r := []rune(ss[index])
-	// 	fmt.Printf("%#v\n", r[0]-'a')
-	// 	dict[index][r[0]-'a'] = int64(index)
+	//
+	// debug
+	//
+	// for _, item := range dict {
+	// 	fmt.Printf("%#v\n", item)
 	// }
+
+	// fmt.Println()
 
 	dp := make([]int64, l+1, l+1)
 	dp[0] = 1
+	for i := 0; i < l; i++ {
+		for j := 0; j < 26; j++ {
+			// 次の文字 j がない場合はスルー
+			if dict[i][j] >= int64(l) {
+				continue
+			}
+			// fmt.Printf("%#v\n", dict[i][j]+1)
+			dp[dict[i][j]+1] += dp[i]
+		}
+	}
+
+	// fmt.Printf("%#v\n", dp)
+
+	var re int64
+	for _, item := range dp {
+		re += item
+	}
+
+	fmt.Println(re % sep)
 
 }
