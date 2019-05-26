@@ -35,10 +35,9 @@ vector<vector<int> > calcNext(const string &S)
             res[i][j] = res[i + 1][j];
         res[i][S[i] - 'a'] = i;
 
-        cout << res[i] << "\n";
+		cout << res[i]
     }
 
-    cout << "\n" << "\n";
     cout << res << endl;
 
     // std::cout << "The vector elements are : ";
