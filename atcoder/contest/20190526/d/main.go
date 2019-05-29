@@ -34,7 +34,6 @@ func main() {
 				cand = append(cand, vals[index])
 			}
 			sort.Sort(cand)
-			// fmt.Printf("%#v %v %v %v\n", cand, a, b, d)
 			if len(cand) > 0 {
 				for index := 0; index < len(cand); index++ {
 					if index < d {
@@ -53,42 +52,22 @@ func main() {
 	}
 
 	for a := 0; a < min; a++ {
-		for b := 0; b < min; b++ {
-			if a+b <= min && 0 < a+b {
-				var tmp int
-				for index := 0; index < a; index++ {
-					tmp += vals[index]
-				}
-				for index := n - 1; index > n-b-1; index-- {
-					tmp += vals[index]
-				}
-				if re < tmp {
-					re = tmp
-				}
-			}
+		var tmp int
+		for index := 0; index < a; index++ {
+			tmp += vals[index]
 		}
+		if re < tmp {
+			re = tmp
+		}
+	}
 
-		if a > 0 {
-			for k := 1; k < min; k++ {
-				for index := 0; index < a; index++ {
-					var tmp int
-					cand := make(sort.IntSlice, 0, min)
-					cand = append(cand, vals[index])
-					sort.Sort(cand)
-					for j := 0; j < len(cand); j++ {
-						if index < k {
-							if cand[j] > 0 {
-								tmp += cand[j]
-							}
-						} else {
-							tmp += cand[j]
-						}
-					}
-					if re < tmp {
-						re = tmp
-					}
-				}
-			}
+	for a := 0; a < min; a++ {
+		var tmp int
+		for index := n-1; index > n-a-1; index-- {
+			tmp += vals[index]
+		}
+		if re < tmp {
+			re = tmp
 		}
 	}
 
