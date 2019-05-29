@@ -33,6 +33,7 @@ func main() {
 			for index := n - 1; index > n-b-1; index-- {
 				cand = append(cand, vals[index])
 			}
+			fmt.Printf("%#v, %#v, %#v\n", a, b, d)
 			sort.Sort(cand)
 			if len(cand) > 0 {
 				for index := 0; index < len(cand); index++ {
@@ -51,25 +52,53 @@ func main() {
 		}
 	}
 
-	for a := 0; a < min; a++ {
-		var tmp int
-		for index := 0; index < a; index++ {
-			tmp += vals[index]
-		}
-		if re < tmp {
-			re = tmp
-		}
-	}
+	// for a := 0; a < min; a++ {
+	// 	cand := make(sort.IntSlice, 0, min)
+	// 	d := min - a
+	// 	var tmp int
+	// 	for index := 0; index < a; index++ {
+	// 		cand = append(cand, vals[index])
+	// 	}
+	// 	sort.Sort(cand)
+	// 	if len(cand) > 0 {
+	// 		for index := 0; index < len(cand); index++ {
+	// 			if index < d {
+	// 				if cand[index] > 0 {
+	// 					tmp += cand[index]
+	// 				}
+	// 			} else {
+	// 				tmp += cand[index]
+	// 			}
+	// 		}
+	// 		if re < tmp {
+	// 			re = tmp
+	// 		}
+	// 	}
+	// }
 
-	for a := 0; a < min; a++ {
-		var tmp int
-		for index := n-1; index > n-a-1; index-- {
-			tmp += vals[index]
-		}
-		if re < tmp {
-			re = tmp
-		}
-	}
+	// for a := 0; a < min; a++ {
+	// 	cand := make(sort.IntSlice, 0, min)
+	// 	d := min - a
+	// 	var tmp int
+	// 	for index := n-1; index > n-a-1; index-- {
+	// 		cand = append(cand, vals[index])
+	// 	}
+	// 	sort.Sort(cand)
+	// 	if len(cand) > 0 {
+	// 		for index := 0; index < len(cand); index++ {
+	// 			if index < d {
+	// 				if cand[index] > 0 {
+	// 					tmp += cand[index]
+	// 				}
+	// 			} else {
+	// 				tmp += cand[index]
+	// 			}
+	// 		}
+	// 		if re < tmp {
+	// 			re = tmp
+	// 		}
+	// 	}
+	// }
 
 	fmt.Println(re)
 }
