@@ -22,83 +22,38 @@ func main() {
 	min := Min(n, k)
 	var re int
 	for a := 0; a <= min; a++ {
-		for b := 0; b <= min-a; b++ {
+		for b := 0; b <= min; b++ {
+			if a+b > min {
+				continue
+			}
 			cand := make(sort.IntSlice, 0, min)
 			d := min - (a + b)
 			var tmp int
 
 			for index := 0; index < a; index++ {
-				cand = append(cand, vals[index])
+				v := vals[index]
+				cand = append(cand, v)
 			}
-			for index := n - 1; index > n-b-1; index-- {
-				cand = append(cand, vals[index])
+			for j2 := 0; j2 < b; j2++ {
+				cand = append(cand, vals[n-1-j2])
 			}
-			fmt.Printf("%#v, %#v, %#v\n", a, b, d)
+			// fmt.Printf("%#v, %#v, %#v\n", a, b, d)
 			sort.Sort(cand)
-			if len(cand) > 0 {
-				for index := 0; index < len(cand); index++ {
-					if index < d {
-						if cand[index] > 0 {
-							tmp += cand[index]
-						}
-					} else {
-						tmp += cand[index]
+			// fmt.Printf("%#v\n", cand)
+			for idx, item := range cand {
+				if idx < d {
+					if item > 0 {
+						tmp += item
 					}
+				} else {
+					tmp += item
 				}
-				if re < tmp {
-					re = tmp
-				}
+			}
+			if re < tmp {
+				re = tmp
 			}
 		}
 	}
-
-	// for a := 0; a < min; a++ {
-	// 	cand := make(sort.IntSlice, 0, min)
-	// 	d := min - a
-	// 	var tmp int
-	// 	for index := 0; index < a; index++ {
-	// 		cand = append(cand, vals[index])
-	// 	}
-	// 	sort.Sort(cand)
-	// 	if len(cand) > 0 {
-	// 		for index := 0; index < len(cand); index++ {
-	// 			if index < d {
-	// 				if cand[index] > 0 {
-	// 					tmp += cand[index]
-	// 				}
-	// 			} else {
-	// 				tmp += cand[index]
-	// 			}
-	// 		}
-	// 		if re < tmp {
-	// 			re = tmp
-	// 		}
-	// 	}
-	// }
-
-	// for a := 0; a < min; a++ {
-	// 	cand := make(sort.IntSlice, 0, min)
-	// 	d := min - a
-	// 	var tmp int
-	// 	for index := n-1; index > n-a-1; index-- {
-	// 		cand = append(cand, vals[index])
-	// 	}
-	// 	sort.Sort(cand)
-	// 	if len(cand) > 0 {
-	// 		for index := 0; index < len(cand); index++ {
-	// 			if index < d {
-	// 				if cand[index] > 0 {
-	// 					tmp += cand[index]
-	// 				}
-	// 			} else {
-	// 				tmp += cand[index]
-	// 			}
-	// 		}
-	// 		if re < tmp {
-	// 			re = tmp
-	// 		}
-	// 	}
-	// }
 
 	fmt.Println(re)
 }
