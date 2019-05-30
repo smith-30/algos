@@ -9,8 +9,6 @@ func main() {
 	fmt.Scan(&b)
 	fmt.Scan(&c)
 
-	cand := []int{a, b, c}
-
 	list := map[int]int{}
 	for index := 0; index < n; index++ {
 		var l int
@@ -19,21 +17,9 @@ func main() {
 		list[l] = l
 	}
 
-	cand2 := []int{}
-	for _, item := range cand {
-		if _, ok := list[item]; ok {
-			delete(list, item)
-		} else {
-			cand2 = append(cand2, item)
-		}
+	fn := func() int {
+		return 0
 	}
 
-	var re
-
-
-
-	fmt.Printf("%#v\n", cand2)
-
-	var re int
-	fmt.Println(re)
+	fmt.Println(fn())
 }
