@@ -53,42 +53,12 @@ func main() {
 	}
 
 	for a := 0; a < min; a++ {
-		for b := 0; b < min; b++ {
-			if a+b <= min && 0 < a+b {
-				var tmp int
-				for index := 0; index < a; index++ {
-					tmp += vals[index]
-				}
-				for index := n - 1; index > n-b-1; index-- {
-					tmp += vals[index]
-				}
-				if re < tmp {
-					re = tmp
-				}
-			}
+		var tmp int
+		for index := 0; index < a; index++ {
+			tmp += vals[index]
 		}
-
-		if a > 0 {
-			for k := 1; k < min; k++ {
-				for index := 0; index < a; index++ {
-					var tmp int
-					cand := make(sort.IntSlice, 0, min)
-					cand = append(cand, vals[index])
-					sort.Sort(cand)
-					for j := 0; j < len(cand); j++ {
-						if index < k {
-							if cand[j] > 0 {
-								tmp += cand[j]
-							}
-						} else {
-							tmp += cand[j]
-						}
-					}
-					if re < tmp {
-						re = tmp
-					}
-				}
-			}
+		if re < tmp {
+			re = tmp
 		}
 	}
 
