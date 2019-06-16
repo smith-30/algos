@@ -14,8 +14,6 @@ func main() {
 
 	var n1 int64
 	fmt.Scan(&n1)
-	dans := make([]int64, p, p)
-	dans[0] = n1
 	mdans := map[int64]int64{
 		n1: n1,
 	}
@@ -23,14 +21,6 @@ func main() {
 	for index := 1; index < p; index++ {
 		var n1 int64
 		fmt.Scan(&n1)
-		if dans[index-1] == n1 {
-			continue
-		}
-		dans[index] = n1
-		if math.Abs(float64(dans[index-1]-dans[index])) == 1 {
-			fmt.Println(0)
-			return
-		}
 		mdans[n1] = n1
 	}
 
@@ -38,6 +28,7 @@ func main() {
 	dp[0] = 1
 
 	for index := 0; index < n; index++ {
+		// fmt.Printf("%#v\n", Min(n, index+2))
 		for j := index + 1; j <= Min(n, index+2); j++ {
 			if _, ok := mdans[int64(j)]; !ok {
 				dp[j] += dp[index]
@@ -46,7 +37,9 @@ func main() {
 		}
 	}
 
-	fmt.Printf("%#v\n", dp)
+	// fmt.Printf("%#v\n", "******")
+	// fmt.Printf("%#v\n", dp)
+	fmt.Printf("%#v\n", dp[n])
 }
 
 func Min(nums ...int) int {
