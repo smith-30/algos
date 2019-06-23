@@ -189,7 +189,7 @@ func (s ByValue) Less(i, j int) bool {
 }
 
 // greatest common divisor (GCD) via Euclidean algorithm
-func GCD(a, b int) int {
+func _GCD(a, b int) int {
 	for b != 0 {
 		t := b
 		b = a % b
@@ -199,11 +199,63 @@ func GCD(a, b int) int {
 }
 
 // find Least Common Multiple (LCM) via GCD
-func LCM(a, b int, integers ...int) int {
-	result := a * b / GCD(a, b)
+func _LCM(a, b int, integers ...int) int {
+	result := a * b / _GCD(a, b)
 
 	for i := 0; i < len(integers); i++ {
 		result = LCM(result, integers[i])
+	}
+
+	return result
+}
+
+/* Function without return declaration*/
+func LCM(temp1 int, temp2 int) int {
+	var lcmnum int = 1
+	if temp1 > temp2 {
+		lcmnum = temp1
+	} else {
+		lcmnum = temp2
+	}
+	/* Use of For Loop as a While Loop*/
+	for {
+		if lcmnum%temp1 == 0 && lcmnum%temp2 == 0 { // And operator
+			/*  Print Statement with multiple variables   */
+			return lcmnum
+		}
+		lcmnum++
+	}
+	return lcmnum // Return without any value
+}
+
+func __gcd(temp1 int, temp2 int) {
+	var gcdnum int
+	/* Use of And operator in For Loop */
+	for i := 1; i <= temp1 && i <= temp2; i++ {
+		if temp1%i == 0 && temp2%i == 0 {
+			gcdnum = i
+		}
+	}
+	fmt.Printf("GCD of %d and %d is %d", temp1, temp2, gcdnum)
+	return
+}
+
+// greatest common divisor (GCD) via Euclidean algorithm
+func Gcd(a, b int) int {
+	for b != 0 {
+		t := b
+		b = a % b
+		a = t
+	}
+	return a
+}
+
+// find Least Common Multiple (LCM) via GCD
+func Lcm(a, b int, integers ...int) int {
+	result := a * b / Gcd(a, b)
+
+	for i := 0; i < len(integers); i++ {
+		result = Lcm(result, integers[i])
 	}
 
 	return result
