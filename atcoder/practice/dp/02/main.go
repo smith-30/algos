@@ -53,27 +53,39 @@ func Max(nums ...int) int {
 
 func main() {
 	n, w := nextInt(), nextInt()
+	vals := make([]int, 0, n)
+	wws := make([]int, 0, n)
+
+	for i := 0; i < n; i++ {
+		vv, w := nextInt(), nextInt()
+		vals = append(vals, vv)
+		wws = append(wws, w)
+	}
+
 	dp := make([][]int, n+1)
 	dp[0] = make([]int, w+1)
 
-	for i := 1; i <= n; i++ {
-		dp[i] = make([]int, w+1)
+	for i := 0; i < n; i++ {
+		dp[i+1] = make([]int, w+1)
 
-		v, ww := nextInt(), nextInt()
-		fmt.Printf("%#v\n", ww)
-		for weight, val := range dp[i-1] {
-			fmt.Printf("%#v\n", weight+ww)
-			if weight+ww <= w {
-				dp[i][weight+ww] = v + val
-				continue
+		for j := 0; j <= w; j++ {
+			// j = 6
+			// wws[i] = 2
+			// dp[i+1][6] = Max(dp[i][4] + vals[i], dp[i][6])
+			if j >= wws[i] {
+				dp[i+1][j] = Max(
+					dp[i][j-wws[i]]+vals[i], // 一つ前のdp結果の値にアクセスして足し算行って、大きい方の値を採用する
+					dp[i][j],
+				)
+			} else {
+				dp[i+1][j] = dp[i][j]
 			}
-
-			dp[i][weight] = Max(v, val)
 		}
 	}
 
 	for _, item := range dp {
 		fmt.Printf("%#v\n", item)
+		fmt.Println()
 	}
 
 	fmt.Printf("%#v\n", dp[n][w])
