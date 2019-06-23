@@ -8,6 +8,41 @@ import (
 	"strconv"
 )
 
+type Pair struct {
+	Key   int64
+	Value int64
+}
+
+// sort.Sort(ByKey(pairs))
+type ByKey []Pair
+
+func (s ByKey) Len() int {
+	return len(s)
+}
+
+func (s ByKey) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+func (s ByKey) Less(i, j int) bool {
+	return s[i].Key < s[j].Key
+}
+
+// sort.Sort(ByValue(pairs))
+type ByValue []Pair
+
+func (s ByValue) Len() int {
+	return len(s)
+}
+
+func (s ByValue) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+func (s ByValue) Less(i, j int) bool {
+	return s[i].Value < s[j].Value
+}
+
 type Int64Slice []*item
 
 func (p Int64Slice) Len() int           { return len(p) }
@@ -50,29 +85,23 @@ func nextLine() string {
 func main() {
 	n := nextInt()
 
-	comb := map[*item]int64{}
-	order := make(Int64Slice, 0, n)
+	order := make([]Pair, 0, n)
 
 	for i := 0; i < n; i++ {
 		a, b := nextInt64(), nextInt64()
-		it := &item{
-			val: b,
+		p := Pair{
+			Key:   a,
+			Value: b,
 		}
-		comb[it] = a
-		order = append(order, it)
+		order = append(order, p)
 	}
 
-	sort.Sort(order)
+	sort.Sort(ByValue(order))
 
-	for _, item := range order {
-		fmt.Printf("%#v\n", item.val)
-	}
-	fmt.Printf("%#v\n", "")
 	var val int64
 	for _, item := range order {
-		fmt.Printf("%#v\n", item.val)
-		val += comb[item]
-		if val > item.val {
+		val += item.Key
+		if val > item.Value {
 			fmt.Println("No")
 			return
 		}

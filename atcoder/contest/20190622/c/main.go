@@ -31,29 +31,7 @@ func main() {
 	a, b, c, d := nextInt(), nextInt(), nextInt(), nextInt()
 	var re int64
 
-	if c == 1 || d == 1 {
-		fmt.Println(0)
-		return
-	}
-
-	if c > a {
-		re += c - a
-	}
-
-	cd := c * d
-
-	for i := c; i <= d; i++ {
-
-	}
-
-	for i := a; i <= b; i++ {
-		if i%c == 0 || i%d == 0 {
-			continue
-		}
-		re++
-	}
-
-	fmt.Printf("%#v\n", 2%4)
+	
 
 	fmt.Println(re)
 }

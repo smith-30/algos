@@ -152,3 +152,59 @@ func StrReverse(s string) string {
 func IntPow(x, y int) int {
 	return int(math.Pow(float64(x), float64(y)))
 }
+
+type Pair struct {
+	Key   int
+	Value int
+}
+
+// sort.Sort(ByKey(pairs))
+type ByKey []Pair
+
+func (s ByKey) Len() int {
+	return len(s)
+}
+
+func (s ByKey) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+func (s ByKey) Less(i, j int) bool {
+	return s[i].Key < s[j].Key
+}
+
+// sort.Sort(ByValue(pairs))
+type ByValue []Pair
+
+func (s ByValue) Len() int {
+	return len(s)
+}
+
+func (s ByValue) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+func (s ByValue) Less(i, j int) bool {
+	return s[i].Value < s[j].Value
+}
+
+// greatest common divisor (GCD) via Euclidean algorithm
+func GCD(a, b int) int {
+	for b != 0 {
+		t := b
+		b = a % b
+		a = t
+	}
+	return a
+}
+
+// find Least Common Multiple (LCM) via GCD
+func LCM(a, b int, integers ...int) int {
+	result := a * b / GCD(a, b)
+
+	for i := 0; i < len(integers); i++ {
+		result = LCM(result, integers[i])
+	}
+
+	return result
+}

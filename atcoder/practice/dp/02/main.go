@@ -52,15 +52,29 @@ func Max(nums ...int) int {
 }
 
 func main() {
-	n := nextInt()
-	dp := make([]int, n+1)
-	dp[0] = 0
+	n, w := nextInt(), nextInt()
+	dp := make([][]int, n+1)
+	dp[0] = make([]int, w+1)
+
 	for i := 1; i <= n; i++ {
-		v := nextInt()
-		dp[i] = Max((dp[i-1] + v), v, dp[i-1])
+		dp[i] = make([]int, w+1)
+
+		v, ww := nextInt(), nextInt()
+		fmt.Printf("%#v\n", ww)
+		for weight, val := range dp[i-1] {
+			fmt.Printf("%#v\n", weight+ww)
+			if weight+ww <= w {
+				dp[i][weight+ww] = v + val
+				continue
+			}
+
+			dp[i][weight] = Max(v, val)
+		}
 	}
 
-	fmt.Printf("%#v\n", dp)
+	for _, item := range dp {
+		fmt.Printf("%#v\n", item)
+	}
 
-	fmt.Printf("%#v\n", dp[n])
+	fmt.Printf("%#v\n", dp[n][w])
 }
