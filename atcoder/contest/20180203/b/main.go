@@ -2,7 +2,9 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"os"
+	"sort"
 	"strconv"
 )
 
@@ -27,5 +29,25 @@ func nextLine() string {
 }
 
 func main() {
+	n := nextInt()
+	vv := make([]int, 0, n)
 
+	for i := 0; i < n; i++ {
+		vv = append(vv, nextInt())
+	}
+
+	sort.Sort(sort.Reverse(sort.IntSlice(vv)))
+
+	m := vv[0]
+
+	var sum int
+	for _, item := range vv[1:] {
+		sum += item
+	}
+
+	if m < sum {
+		fmt.Println("Yes")
+	} else {
+		fmt.Println("No")
+	}
 }
