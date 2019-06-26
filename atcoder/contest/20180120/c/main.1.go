@@ -30,29 +30,20 @@ func nextLine() string {
 func main() {
 	n := nextInt()
 
-	nn := make([]int, 10000, 10000)
-	mm := map[int]int{}
-
-	nn[0] = n
-	mm[n]++
-
-	i := 1
-	for {
-		var re int
-		v := nn[i-1]
-		if v%2 == 0 {
-			nn[i] = v / 2
-			re = v / 2
-		} else {
-			nn[i] = 3*v + 1
-			re = 3*v + 1
-		}
-
-		mm[re]++
-		if mm[re] > 1 {
-			fmt.Println(i + 1)
-			return
-		}
-		i++
+	var ans, active int
+	nn := make([]int, 0, n)
+	for i := 0; i < n; i++ {
+		nn = append(nn, nextInt())
 	}
+
+	// 区間いくつ引けるかを都度判断していく
+	for i := 0; i < n; i++ {
+		if active < nn[i] {
+			fmt.Printf("%#v\n", nn[i]-active)
+			ans += nn[i] - active
+		}
+		active = nn[i]
+	}
+
+	fmt.Printf("%#v\n", ans)
 }
