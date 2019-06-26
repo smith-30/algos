@@ -260,3 +260,7 @@ func Lcm(a, b int, integers ...int) int {
 
 	return result
 }
+
+func IntReverse(vv []int) {
+	sort.Sort(sort.Reverse(sort.IntSlice(vv)))
+}
