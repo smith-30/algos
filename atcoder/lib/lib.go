@@ -264,3 +264,68 @@ func Lcm(a, b int, integers ...int) int {
 func IntReverse(vv []int) {
 	sort.Sort(sort.Reverse(sort.IntSlice(vv)))
 }
+
+func nCr(n, r int64) int64 {
+	if r == 0 {
+		return 0
+	}
+
+	var a int64 = 1
+	for i := 0; i < int(r); i++ {
+		a *= (n - int64(i))
+	}
+
+	var b int64 = 1
+	for i := 1; i <= int(r); i++ {
+		b *= int64(i)
+	}
+
+	return a / b
+}
+
+const COMNUM = 2000
+
+const MOD = 1000000007
+
+var Com [][]int64
+
+func CalcCom(comnum int) {
+	Com = make([][]int64, comnum, comnum)
+	Com[0] = make([]int64, comnum, comnum)
+	Com[0][0] = 1
+	for i := 1; i < comnum; i++ {
+		Com[i] = make([]int64, comnum, comnum)
+	}
+	for i := 1; i < comnum; i++ {
+		Com[i][0] = 1
+		for j := 1; j < comnum; j++ {
+			Com[i][j] = (Com[i-1][j-1] + Com[i-1][j]) % MOD
+		}
+	}
+}
+
+const MAX = 2001
+const _MOD = 1000000007
+
+var fac, finv, inv [MAX]int
+
+func cominit() {
+	fac[0], fac[1] = 1, 1
+	finv[0], finv[1] = 1, 1
+	inv[1] = 1
+	for i := 2; i < MAX; i++ {
+		fac[i] = fac[i-1] * i % MOD
+		inv[i] = MOD - inv[MOD%i]*(MOD/i)%MOD
+		finv[i] = finv[i-1] * inv[i] % MOD
+	}
+}
+
+func combination(n, k int) int {
+	if n < k {
+		return 0
+	}
+	if n < 0 || k < 0 {
+		return 0
+	}
+	return fac[n] * (finv[k] * finv[n-k] % MOD) % MOD
+}
