@@ -32,37 +32,24 @@ func nextLine() string {
 func main() {
 	l, r := nextInt(), nextInt()
 
-	ll := l % div
-	rr := r % div
-
-	var s, e int64
-	if ll > rr {
-		s = rr
-		e = ll
-	} else {
-		s = ll
-		e = rr
-	}
-
-	if s == e {
-		fmt.Println(s % div)
-		return
-	}
-
-	if s == 0 {
+	if r-l >= 2019 {
 		fmt.Println(0)
 		return
 	}
 
 	re := int64(9999999999)
-	for i := s; i <= e; i++ {
-		for j := i; j <= e; j++ {
+	for i := l; i <= r; i++ {
+		for j := i; j <= r; j++ {
 			if i == j {
 				continue
 			}
 			v := i * j % div
 			if re > v {
 				re = v
+			}
+			if re == 0 {
+				fmt.Println(re)
+				return
 			}
 		}
 	}
