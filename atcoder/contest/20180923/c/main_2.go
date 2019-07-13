@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"strings"
 )
 
 var sc = bufio.NewScanner(os.Stdin)
@@ -28,30 +29,19 @@ func nextLine() string {
 }
 
 func main() {
-	s := nextLine()
-	t := nextLine()
-
-	fmt.Printf("%#v\n", s)
-	fmt.Printf("%#v\n", t)
+	s := strings.Split(nextLine(), "")
+	t := strings.Split(nextLine(), "")
 
 	n := len(s)
-	fmt.Printf("%#v\n", n)
-
-	// return
-
-	start := make([]int, 0, 26)
-	goal := make([]int, 0, 26)
-	for i := 0; i < 26; i++ {
-		start = append(start, -1)
-		goal = append(goal, -1)
-	}
+	start := map[string]string{}
+	goal := map[string]string{}
 
 	for i := 0; i < n; i++ {
-		a := int(s[i] - 'a')
-		b := int(t[i] - 'a')
+		a := s[i]
+		b := t[i]
 
-		// 何かしら変換が行われている]
-		if start[a] != -1 {
+		// 何かしら変換が行われている
+		if start[a] != "" {
 			if start[a] != b {
 				fmt.Println("No")
 				return
@@ -60,7 +50,7 @@ func main() {
 			start[a] = b
 		}
 
-		if goal[b] != -1 {
+		if goal[b] != "" {
 			if goal[b] != a {
 				fmt.Println("No")
 				return
