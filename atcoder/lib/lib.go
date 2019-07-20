@@ -329,3 +329,46 @@ func combination(n, k int) int {
 	}
 	return fac[n] * (finv[k] * finv[n-k] % MOD) % MOD
 }
+
+func modpow(a, p int64) int64 {
+	if p == 0 {
+		return 1
+	}
+
+	if p%2 == 0 {
+		//pが偶数の時
+		halfP := p / 2
+		half := modpow(a, halfP)
+		//a^(p/2) をhalfとして、half*halfを計算
+		return half * half % MOD
+	} else {
+		//pが奇数の時は、
+		//pを偶数にするために1減らす
+		return a * modpow(a, p-1) % MOD
+	}
+}
+
+//(10*9*8)/(3*2*1);
+//10*9*8 -> ansMul
+//3*2*1 -> ansDiv
+func calcComb(a, b int64) int64 {
+	if b > a-b {
+		return calcComb(a, a-b)
+	}
+
+	var ansMul int64 = 1
+	var ansDiv int64 = 1
+	var i int64
+	for i = 0; i < b; i++ {
+		ansMul *= (a - i)
+		ansDiv *= (i + 1)
+		ansMul %= MOD
+		ansDiv %= MOD
+	}
+	//ansMul / ansDivをやりたい
+	//ansDivの逆元を使って求めよう！
+
+	ans := ansMul * modpow(ansDiv, MOD-2) % MOD
+	return ans
+}
+
