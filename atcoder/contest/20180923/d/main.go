@@ -35,6 +35,8 @@ func main() {
 
 	MNokori := int(M)
 	var ans int64 = 1
+	
+	// 素因数分解
 	for i := 2; i*i <= MNokori; i++ {
 		if MNokori%i == 0 {
 			var cnt int64
@@ -43,7 +45,7 @@ func main() {
 				MNokori /= i
 			}
 			//cntが2^Xとか3^XのXの部分
-			ans *= calcComb(N+cnt-1, N-1) //N-1はcntと同じ
+			ans *= calcComb(cnt+N-1, N-1) //N-1はcntと同じ
 			ans %= MOD
 		}
 	}

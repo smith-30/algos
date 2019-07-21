@@ -372,3 +372,17 @@ func calcComb(a, b int64) int64 {
 	return ans
 }
 
+func Divisors(n int) []int {
+	divisors := make([]int, 0, 1000)
+	end := int(math.Pow(float64(n), 0.5) + 1)
+	for i := 1; i < end; i++ {
+		if n%i == 0 {
+			divisors = append(divisors, i)
+			if v := n / i; i != n/i {
+				divisors = append(divisors, v)
+			}
+		}
+
+	}
+	return divisors
+}
