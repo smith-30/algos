@@ -26,45 +26,36 @@ func nextInt() int {
 func main() {
 	n := nextInt()
 	as := make([]int, n+1)
-	nn := make([]int, 0, n)
+	nn := make([]int, n+1)
 
 	for i := 1; i <= n; i++ {
 		as[i] = nextInt()
 	}
 
-	cache := map[int]int{}
-
 	for i := n; i > 0; i-- {
-		if v, ok := cache[i]; ok {
-			if v%2 == as[i] {
-				continue
-			}
-			if as[i] == 1 && v%2 == 0 {
-				nn = append(nn, i)
-			}
-		} else {
-			if as[i] == 1 {
-				nn = append(nn, i)
-				divs := Divisors(i)
-				for _, item := range divs {
-					cache[item]++
-				}
-			}
+		var sum int
+		for j := i + i; j <= n; j += i {
+			sum ^= nn[j]
 		}
-
+		nn[i] = sum ^ as[i]
 	}
 
-	l := len(nn)
+	ans := make([]int, 0, n+1)
+
+	for idx, item := range nn {
+		if item == 1 {
+			ans = append(ans, idx)
+		}
+	}
+	l := len(ans)
 	fmt.Printf("%#v\n", l)
 	if l > 0 {
-		// for i := l - 1; i >= 0; i-- {
-		// 	fmt.Printf("%#v ", nn[i])
-		// }
-		for _, item := range nn {
-			fmt.Printf("%#v ", item)
+		for _, item := range ans {
+			fmt.Printf("%v ", item)
 		}
 		fmt.Println()
 	}
+
 }
 
 func Divisors(n int) []int {
