@@ -1,9 +1,12 @@
 package lib
 
 import (
+	"bufio"
 	"fmt"
 	"math"
+	"os"
 	"sort"
+	"strconv"
 )
 
 type Int64Slice []int64
@@ -399,4 +402,24 @@ func (h *PriorityQueue) Pop() interface{} {
 	x := old[n-1]
 	*h = old[0 : n-1]
 	return x
+}
+
+var sc = bufio.NewScanner(os.Stdin)
+
+func init() {
+	sc.Split(bufio.ScanWords)
+}
+
+func nextInt() int {
+	sc.Scan()
+	i, e := strconv.ParseInt(sc.Text(), 10, 64)
+	if e != nil {
+		panic(e)
+	}
+	return int(i)
+}
+
+func nextLine() string {
+	sc.Scan()
+	return sc.Text()
 }
