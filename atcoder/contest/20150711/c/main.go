@@ -37,7 +37,6 @@ func main() {
 			Child: make([]*Node, 0, 20),
 		}
 	}
-	fmt.Printf("%#v\n", ns)
 	for i := 1; i < n; i++ {
 		num := nextInt() - 1
 		ns[num].Child = append(ns[num].Child, &Node{Idx: i})
@@ -50,12 +49,35 @@ func main() {
 		}
 	}
 
-	for _, item := range ns {
-		fmt.Printf("%#v\n", item)
-		// for _, i := range item.Child {
-		// 	fmt.Printf("%#v\n", i)
-		// }
+	// for _, item := range ns {
+	// 	fmt.Printf("%#v\n", item)
+	// }
+
+	for i := n - 1; i >= 0; i-- {
+		if len(ns[i].Child) > 0 {
+			if len(ns[i].Child) == 1 {
+				ns[i].Val = ns[ns[i].Child[0].Idx].Val*2 + 1
+				continue
+			}
+			var min, max int64
+			for _, item := range ns[i].Child {
+				v := ns[item.Idx]
+				if v.Val > max {
+					max = v.Val
+				}
+
+				if min == 0 {
+					min = v.Val
+					continue
+				}
+
+				if min > v.Val {
+					min = v.Val
+				}
+			}
+			ns[i].Val = min + max + 1
+		}
 	}
 
-	fmt.Println(ns)
+	fmt.Printf("%#v\n", ns[0].Val)
 }
