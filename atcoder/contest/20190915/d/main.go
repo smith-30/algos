@@ -22,11 +22,6 @@ func nextInt() int {
 	return int(i)
 }
 
-func nextLine() string {
-	sc.Scan()
-	return sc.Text()
-}
-
 func main() {
 	n := nextInt()
 

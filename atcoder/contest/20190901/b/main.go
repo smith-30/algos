@@ -22,14 +22,27 @@ func nextInt() int {
 	return int(i)
 }
 
-func nextLine() string {
-	sc.Scan()
-	return sc.Text()
-}
-
 func main() {
-	n := nextInt()
+	a, b := nextInt(), nextInt()
+	if b == 1 {
+		fmt.Println(0)
+		return
+	}
 
-	var re int
-	fmt.Println()
+	var re, c int
+
+	for {
+		if re == 0 {
+			re = a
+		} else {
+			re--
+			re += a
+		}
+		c++
+
+		if re >= b {
+			fmt.Println(c)
+			return
+		}
+	}
 }

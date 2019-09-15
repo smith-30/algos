@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"strconv"
 )
@@ -21,16 +22,43 @@ func nextInt() int {
 	return int(i)
 }
 
+var (
+	ans  []int
+	tree [][]int
+)
+
 func main() {
 	n := nextInt()
 	q := nextInt()
 
-	line := make([]int64, n)
-	for index := 1; index <= n; index++ {
-		from, to := nextInt(), nextInt()
+	tree = make([][]int, n)
+
+	for index := 0; index < n-1; index++ {
+		from, to := nextInt()-1, nextInt()-1
+
+		tree[from] = append(tree[from], to)
+		tree[to] = append(tree[to], from)
 	}
 
+	ans = make([]int, n)
 	for index := 0; index < q; index++ {
-		target, v := nextInt(), nextInt()
+		target, v := nextInt()-1, nextInt()
+		ans[target] += v
+	}
+	dfs(0, -1)
+
+	for _, item := range ans {
+		fmt.Printf("%v ", item)
+	}
+	fmt.Println()
+}
+
+func dfs(n, from int) {
+	for _, item := range tree[n] {
+		if from == item {
+			continue
+		}
+		ans[item] += ans[n]
+		dfs(item, n)
 	}
 }
