@@ -28,8 +28,12 @@ func nextLine() string {
 }
 
 func main() {
-	n := nextInt()
+	n := nextLine()
+	mm := map[string]string{
+		"Sunny":  "Cloudy",
+		"Cloudy": "Rainy",
+		"Rainy":  "Sunny",
+	}
 
-	var re int
-	fmt.Println()
+	fmt.Println(mm[n])
 }

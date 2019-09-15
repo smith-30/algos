@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"strings"
 )
 
 var sc = bufio.NewScanner(os.Stdin)
@@ -22,9 +23,39 @@ func nextInt() int {
 	return int(i)
 }
 
-func main() {
-	n := nextInt()
+func nextLine() string {
+	sc.Scan()
+	return sc.Text()
+}
 
-	var re int
-	fmt.Println()
+func main() {
+	n := nextLine()
+
+	ok := true
+	ss := strings.Split(n, "")
+
+	for idx, item := range ss {
+		if (idx+1)%2 != 0 {
+			switch item {
+			case "R", "U", "D":
+			default:
+				ok = false
+				break
+			}
+		} else {
+			switch item {
+			case "L", "U", "D":
+			default:
+				ok = false
+				break
+			}
+		}
+	}
+
+	if ok {
+		fmt.Println("Yes")
+	} else {
+		fmt.Println("No")
+	}
+
 }

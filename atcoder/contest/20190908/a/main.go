@@ -30,6 +30,5 @@ func nextLine() string {
 func main() {
 	n := nextInt()
 
-	var re int
-	fmt.Println()
+	fmt.Println(n * n * n)
 }
