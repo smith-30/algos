@@ -43,8 +43,7 @@ func SIntSlice(n int) []int {
 }
 
 func StrSlice() []string {
-	var s string
-	fmt.Scan(&s)
+	s := SStr()
 	return strings.Split(s, "")
 }
 
